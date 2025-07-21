@@ -1,0 +1,70 @@
+fstrings 
+f"{index}-{items} //strings
+todos.pop(number)  //removes and return item at index
+len(item) // the length of the list /item
+list.sort() // sort the items in the list
+
+FILES:
+file = open('todos.txt', 'w') // opens path to a txt file with W mneans WRITE
+file = open('todos.txt', 'r')//means READ
+file.writelines(item)//writes to the referenced file 
+file.close() //one for readlines and one for writelies to close the reference so no more changes happend to that file
+zip(item1, item2):// zips items
+creating multiple text files
+
+example
+countries = ["Albania", "Belgium", "Canada", "Denmark", "Ethiopia", "France"]
+for item in countries:
+    file = open(f"{item}.txt", "w")
+    file.write(item)//writes single string
+    file.close()
+
+file.read // reads sigle string
+
+
+.isdigit() checks if the character in the loop is a digit and returns true or false
+
+
+myfilesp glob.glob("*.txt") // returns a list with what i have inside the parenthesis , for example i have .txt which will
+                                bring a list with all the txt files of the project ,good usage if you have a folder of full files
+                                and you want to loop in each of them or a specific one 
+
+
+with open(... .csv, r ) as file 
+data = list(csv.reader(file))
+//returns a list of the csv as a list , diladi a list in a lis tof data which u can manipulate 
+
+shutil.make_archive("name of the folder","type aka zip","dierectory") //zips a specific folder of files
+
+
+webbrowser.open("https://whatever.com" + variable)//searches thhe browser for what ever you want  witht he input variable
+
+dictionary [{}] // it has a discrtipion and its sting value for example
+[{"question_text":"what occupies most of the earths surface","alternatives":["land","water"],"correct_answer":2}]
+2 indicates land or water
+//you can save data on .json file for the data for example 
+
+import json 
+
+with open ("questions.json", "r") as file : 
+        content = file.read()
+
+data= json.loads(content)
+score = 0 
+for questions in data:
+     print(question["question_text"])
+    //since alternatives are nested list you can have nested for
+    for index,alternative in enoumerate(question["aternatives"]):
+        print(index+1 ,"-",alternative)
+    //now for the user choice outside the nested loop
+    user_choice - int(input("enter your answer:"))
+    //question the current dictionary "user_choice" is the indication and the value is the number of the correct answert o the previus seleciton of the dictionary 
+    question["user_choice"] = user_choice
+    //checks the correct answer
+    if question["user_choice"]== question["correct answer"] :
+       score = score +1
+for question in data:
+     message= f"your answer: {question['user_choice']},"\
+        f"correct answer":{question['correct_answer']}
+   
+print(Score,"/",keb(data)) // etx 1/2 correct answersa
