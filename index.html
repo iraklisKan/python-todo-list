@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Todo List - Python & Streamlit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background: rgba(255,255,255,0.9);
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            background: white;
+            color: #667eea;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .feature-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .feature-card li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .feature-card li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+        
+        .demo-section {
+            text-align: center;
+            margin: 4rem 0;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .tech-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>🚀 Advanced Todo List</h1>
+            <p>A feature-rich productivity app built with Python & Streamlit</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" id="webAppBtn">🌐 Try Web App</a>
+                <a href="https://github.com/iraklisKan/python-todo-list" class="btn">📦 View on GitHub</a>
+                <a href="https://github.com/iraklisKan/python-todo-list/archive/refs/heads/main.zip" class="btn">💾 Download</a>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">🐍 Python</span>
+                <span class="tech-tag">🌐 Streamlit</span>
+                <span class="tech-tag">📊 Plotly</span>
+                <span class="tech-tag">🐼 Pandas</span>
+                <span class="tech-tag">📄 JSON</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <h3>🎯 Core Features</h3>
+                <ul>
+                    <li>Add, edit, and delete todos</li>
+                    <li>Mark todos as complete</li>
+                    <li>Real-time search and filtering</li>
+                    <li>Categories and priority levels</li>
+                    <li>Due date management</li>
+                    <li>Timestamp tracking</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>📊 Analytics & Insights</h3>
+                <ul>
+                    <li>Interactive statistics dashboard</li>
+                    <li>Completion rate tracking</li>
+                    <li>Category breakdown charts</li>
+                    <li>Priority analysis</li>
+                    <li>Timeline visualizations</li>
+                    <li>Export/Import capabilities</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <h3>🎨 Modern Interface</h3>
+                <ul>
+                    <li>Responsive design for all devices</li>
+                    <li>Beautiful, intuitive UI</li>
+                    <li>Dark/Light mode support</li>
+                    <li>Bulk operations</li>
+                    <li>Advanced filtering options</li>
+                    <li>Seamless user experience</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>🎮 Two Ways to Use</h2>
+            <p style="margin: 1rem 0;">Choose your preferred interface:</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary" id="webAppBtn2">🌐 Web Interface</a>
+                <a href="https://github.com/iraklisKan/python-todo-list#%EF%B8%8F-command-line-version" class="btn">🖥️ CLI Version</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Built with ❤️ using Python & Streamlit | <a href="https://github.com/iraklisKan" style="color: white;">@iraklisKan</a></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Update these URLs when your Streamlit app is deployed
+        const STREAMLIT_URL = 'https://your-app-name.streamlit.app/'; // Replace with actual URL
+        
+        document.getElementById('webAppBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Check if Streamlit URL is set
+            if (STREAMLIT_URL.includes('your-app-name')) {
+                alert('🚀 Streamlit app not yet deployed!\n\nTo deploy:\n1. Go to https://share.streamlit.io/\n2. Connect your GitHub repo\n3. Deploy todolist/web.py\n4. Update the URL in this page');
+            } else {
+                window.open(STREAMLIT_URL, '_blank');
+            }
+        });
+        
+        document.getElementById('webAppBtn2').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (STREAMLIT_URL.includes('your-app-name')) {
+                alert('🚀 Streamlit app not yet deployed!\n\nTo deploy:\n1. Go to https://share.streamlit.io/\n2. Connect your GitHub repo\n3. Deploy todolist/web.py\n4. Update the URL in this page');
+            } else {
+                window.open(STREAMLIT_URL, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
