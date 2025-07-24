@@ -32,24 +32,46 @@ st.markdown("""
         margin: 0.5rem 0;
         border-radius: 10px;
         border-left: 5px solid #667eea;
-        background-color: #f8f9fa;
+        background-color: #ffffff;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .todo-item h4 {
+        margin: 0 0 0.5rem 0;
+        color: #212529 !important;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    
+    .todo-item small {
+        color: #6c757d !important;
+        font-size: 0.85rem;
     }
     
     .priority-high {
         border-left-color: #dc3545 !important;
+        background-color: #fff5f5 !important;
     }
     
     .priority-medium {
         border-left-color: #ffc107 !important;
+        background-color: #fffdf5 !important;
     }
     
     .priority-low {
         border-left-color: #28a745 !important;
+        background-color: #f8fff8 !important;
     }
     
     .completed-todo {
-        opacity: 0.6;
+        opacity: 0.7;
+        background-color: #f8f9fa !important;
+    }
+    
+    .completed-todo h4 {
         text-decoration: line-through;
+        color: #6c757d !important;
     }
     
     .stats-card {
@@ -115,6 +137,14 @@ def render_sidebar():
     
     st.sidebar.markdown("---")
     
+    # Display options
+    st.sidebar.subheader("🎨 Display")
+    if 'simple_mode' not in st.session_state:
+        st.session_state.simple_mode = False
+    st.session_state.simple_mode = st.sidebar.checkbox("Simple Mode", value=st.session_state.simple_mode, help="Use simple text display if styling issues occur")
+    
+    st.sidebar.markdown("---")
+    
     # Filters (only show on Todo List page)
     if st.session_state.current_page == "Todo List":
         st.sidebar.subheader("🔍 Filters")
@@ -149,18 +179,34 @@ def render_todo_item(todo: Dict):
         col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
         
         with col1:
-            # Todo text and details
-            st.markdown(f"""
-                <div class="todo-item {priority_class} {completed_class}">
-                    <h4>{todo['text']}</h4>
-                    <small>
-                        📁 {todo.get('category', 'General')} | 
-                        🔥 {todo.get('priority', 'Medium')} | 
-                        📅 {datetime.fromisoformat(todo['created_at']).strftime('%Y-%m-%d %H:%M')}
-                        {f" | 🎯 Due: {todo['due_date']}" if todo.get('due_date') else ""}
-                    </small>
-                </div>
-            """, unsafe_allow_html=True)
+            # Check if simple mode is enabled
+            if st.session_state.get('simple_mode', False):
+                # Simple text display
+                status_emoji = "✅" if todo['completed'] else "⏳"
+                priority_emoji = {"High": "🔥", "Medium": "📅", "Low": "💤"}.get(todo.get('priority', 'Medium'), "📅")
+                
+                if todo['completed']:
+                    st.markdown(f"~~**{status_emoji} {todo['text']}**~~")
+                else:
+                    st.markdown(f"**{status_emoji} {todo['text']}**")
+                
+                st.caption(f"📁 {todo.get('category', 'General')} | {priority_emoji} {todo.get('priority', 'Medium')} | 📅 {datetime.fromisoformat(todo['created_at']).strftime('%Y-%m-%d %H:%M')}" + (f" | 🎯 Due: {todo['due_date']}" if todo.get('due_date') else ""))
+            else:
+                # Styled display
+                status_emoji = "✅" if todo['completed'] else "⏳"
+                priority_emoji = {"High": "🔥", "Medium": "📅", "Low": "💤"}.get(todo.get('priority', 'Medium'), "📅")
+                
+                st.markdown(f"""
+                    <div class="todo-item {priority_class} {completed_class}">
+                        <h4>{status_emoji} {todo['text']}</h4>
+                        <small>
+                            📁 {todo.get('category', 'General')} | 
+                            {priority_emoji} {todo.get('priority', 'Medium')} Priority | 
+                            📅 {datetime.fromisoformat(todo['created_at']).strftime('%Y-%m-%d %H:%M')}
+                            {f" | 🎯 Due: {todo['due_date']}" if todo.get('due_date') else ""}
+                        </small>
+                    </div>
+                """, unsafe_allow_html=True)
         
         with col2:
             # Complete/Uncomplete toggle

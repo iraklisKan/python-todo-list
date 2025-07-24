@@ -2,10 +2,28 @@
   {
     "id": 1,
     "text": "Test todo",
-    "completed": false,
+    "completed": true,
     "created_at": "2025-07-24T22:51:17.143421",
     "category": "Work",
     "priority": "High",
     "due_date": "2025-01-25"
+  },
+  {
+    "id": 2,
+    "text": "rregerg",
+    "completed": true,
+    "created_at": "2025-07-24T22:54:50.574038",
+    "category": "General",
+    "priority": "Medium",
+    "due_date": null
+  },
+  {
+    "id": 3,
+    "text": "adaaddddddd",
+    "completed": false,
+    "created_at": "2025-07-24T22:55:11.324335",
+    "category": "General",
+    "priority": "Medium",
+    "due_date": "2025-07-22"
   }
 ]
